@@ -42,27 +42,27 @@ ring({
 
 #### init: [state, effect?]
 ##### state: _
-The initial state of the `app`. It can be any type of data.
+The initial `state` of the `app`. It can be any type of data.
 
 ##### effect: dispatch => ()
-Optional function that introduces side effects.
+Optional function that introduces side `effects`.
 
 ##### dispatch: message => ()
-Function that triggers an update on the state. 
+Function that triggers an `update` on the `state`. 
 
 #### update: (message, state) => [newState, effect?]
 ##### message: _
-The context of the update. It can be any type of data.
+The context of the `update`. It can be any type of data.
 
 ##### state: _
-The current state when update was called. It can be any type of data.
+The current `state` when `update` was called. It can be any type of data.
 
 ##### newState: _
-The new state of the `app`. It can be any type of data.
+The new `state` of the `app`. It can be any type of data.
 
 #### view: (state, dispatch) => ()
-Called every state change for rendering.
-Any view layer can be used.
+Called every `state` `change` for rendering.
+Any `view` layer can be used.
 
 #### done: state => ()
 Optional function that will be called to end the `app`.
