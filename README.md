@@ -9,7 +9,7 @@ Minimalist and functional javascript state manager.
  - [ES6 module](https://github.com/marcodpt/ring/blob/main/index.js).
  - Pure functional design.
  - View layer agnostic.
- - [Tiny codebase](https://github.com/marcodpt/ring/blob/main/src/index.js),
+ - [Tiny codebase](https://github.com/marcodpt/ring/blob/main/index.js),
 very understandable.
  - Designed following the principles of
 [UNIX philosophy](https://en.wikipedia.org/wiki/Unix_philosophy).
@@ -19,6 +19,8 @@ understand `Ring` better than me.
 
 ## 💡 Showcase
 A counter that increments by one every time the user confirms.
+
+[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/)
 
 ```js
 import ring from "https://cdn.jsdelivr.net/gh/marcodpt/ring/index.js"
@@ -68,7 +70,7 @@ Any `view` layer can be used.
 Optional function that will be called to end the `app`.
 
 #### stop: () => ()
-Returns a function that stops the `app`.
+Returns a function that `stops` the `app`.
 
 ## 📦 Projects using this module
 If your project is not on the list, submit a pull request, it is a way to
