@@ -4,6 +4,7 @@ Minimalist and functional javascript state manager.
 
   [![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![GitHub Tag](https://img.shields.io/github/v/tag/marcodpt/ring)](https://github.com/marcodpt/ring/tags)
 
 ## ❤️ Features
  - [ES6 module](https://github.com/marcodpt/ring/blob/main/index.js).
