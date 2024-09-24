@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <title>Ring</title>
+  </head>
+  <body>
+    <h1><img src="favicon.ico"> Ring</h1>
+    <h2>Pet</h2>
+    <button value="3">Previous</button>
+    <button value="1">Next</button>
+    <p></p>
+    <script type="module">
+      import ring from "./new.js"
+
+      const DB = [
+        '1.Dog',
+        '2.Cat',
+        '3.Horse',
+        '4.Bird'
+      ]
+
+      setTimeout(() => ring({
+        init: {},
+        builder: (update, dispatch) => ({
+          init: () => {
+            document.body.querySelectorAll('button').forEach(btn => {
+              btn.addEventListener('click', ev => {
+                dispatch('load', ev.target.value)
+              })
+            })
+            dispatch('load')
+          },
+          load: delta => {
+            var i
+            update(({index}) => {
+              i = delta != null ? index + parseInt(delta) : 0
+              return {
+                index: i,
+                text: 'Loading...'
+              }
+            })
+            setTimeout(() => update(({index, text}) => ({
+              index: i == index ? i : index,
+              text: i == index ? DB[i % DB.length] : text
+            })), 1000)
+          } 
+        }),
+        view: ({text}) => {
+          document.body.querySelector('p').textContent = text
+        }
+      }))
+    </script>
+  </body>
+</html>
