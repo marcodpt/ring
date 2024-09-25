@@ -2,9 +2,10 @@
 
 Minimalist and functional javascript state manager.
 
-  [![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/)
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-  [![GitHub Tag](https://img.shields.io/github/v/tag/marcodpt/ring)](https://github.com/marcodpt/ring/tags)
+[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Tag](https://img.shields.io/github/v/tag/marcodpt/ring)](https://github.com/marcodpt/ring/tags)
+[![bundlejs](https://deno.bundlejs.com/badge?q=https://raw.githubusercontent.com/marcodpt/ring/main/index.js&treeshake=[{default}])](https://bundlejs.com/?q=https://raw.githubusercontent.com/marcodpt/ring/main/index.js&treeshake=[{default}])
 
 ## ❤️ Features
  - [ES6 module](https://github.com/marcodpt/ring/blob/main/index.js).
@@ -19,56 +20,97 @@ very understandable.
 understand `Ring` better than me.
 
 ## 💡 Showcase
-A counter that increments by one every time the user confirms.
+[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/todo.html)
 
-[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/)
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Todo - Ring</title>
+  </head>
+  <body>
+    <h1>To do list</h1>
+    <input type="text">
+    <ul></ul>
+    <button>New!</button>
+    <script type="module">
+      import ring from "https://cdn.jsdelivr.net/gh/marcodpt/ring/index.js"
 
-```js
-import ring from "https://cdn.jsdelivr.net/gh/marcodpt/ring/index.js"
-
-ring({
-  init: [0],
-  update: (message, state) => {
-    return [state + 1]
-  },
-  view: (state, dispatch) => {
-    if (window.confirm(`Count is ${state}. Increment?`)) {
-      dispatch()
-    }
-  }
-})
+      ring({
+        init: [],
+        builder: (update, dispatch) => ({
+          init: () => {
+            const input = document.body.querySelector('input')
+            document.body.querySelector('button').
+              addEventListener('click',() => {
+                dispatch('addTodo', input.value)
+                input.value = ""
+              })
+          },
+          addTodo: value => update(todos => todos.concat(value))
+        }),
+        view: todos => {
+          document.body.querySelector('ul').innerHTML =
+            todos.map(todo => `<li>${todo}</li>`).join('\n')
+        }
+      })
+    </script>
+  </body>
+</html>
 ```
+
+## 💯 Examples
+
+### Counter
+[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/counter.html)
+[![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/ring/blob/main/examples/counter.html)
+
+### Todo
+[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/todo_ssr.html)
+[![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/ring/blob/main/examples/todo_ssr.html)
+
+### Clock:
+[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/clock.html)
+[![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/ring/blob/main/examples/clock.html)
+
+### Stopwatch:
+[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/stopwatch.html)
+[![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/ring/blob/main/examples/stopwatch.html)
+
+### Lazy DB:
+[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/lazy_db.html)
+[![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/ring/blob/main/examples/lazy_db.html)
 
 ## 📖 API
 
-### app({init, update, view, done?}) => stop
+### app({init, builder, view}) => stop
 
-#### init: [state, effect?]
-##### state: _
+#### init: _
 The initial `state` of the `app`. It can be any type of data.
 
-##### effect: dispatch => ()
-Optional function that introduces side `effects`.
+#### builder: (update, dispatch) => events
+This function is called before starting the app and must return the events that
+will be heard in the app.
 
-##### dispatch: message => ()
-Function that triggers an `update` on the `state`. 
+##### update: (state => newState) => ()
+Receives a `setter` to `update` the `state` and call `view` with the
+`newState`.
 
-#### update: (message, state) => [newState, effect?]
-##### message: _
-The context of the `update`. It can be any type of data.
+##### dispatch: (event, ...args) => ()
+It will call the `event` with `args`, if it exists in the `events` object.
 
-##### state: _
-The current `state` when `update` was called. It can be any type of data.
+##### events: {init: () => (), event: (...args) => (), done: () => ()}
+Object with the `events` that will be heard when running the `app`.
 
-##### newState: _
-The new `state` of the `app`. It can be any type of data.
+##### init: state => ()
+Special event called when starting `app`.
 
-#### view: (state, dispatch) => ()
-Called every `state` `change` for rendering.
-Any `view` layer can be used.
+##### done: state => ()
+Special event called when `app` ends.
 
-#### done: state => ()
-Optional function that will be called to end the `app`.
+#### view: (state, events) => ()
+Updates the `view` of the `app`, it is always called after an `update` or when
+starting.
 
 #### stop: () => ()
 Returns a function that `stops` the `app`.

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <title>Counter - Ring</title>
+  </head>
+  <body>
+    <h1><img src="../favicon.ico"> Counter: <span></span></h1>
+    <button value="-1">-</button>
+    <button value="1">+</button>
+    <script type="module">
+      import ring from "../index.js"
+
+      ring({
+        init: 0,
+        builder: (update, dispatch) => ({
+          init: () => {
+            document.body.querySelectorAll('button').forEach(btn => {
+              btn.addEventListener('click', ev => {
+                dispatch('change', parseInt(ev.target.value))
+              })
+            })
+          },
+          change: delta => {
+            update(count => count + delta)
+          } 
+        }),
+        view: (count) => {
+          document.body.querySelector('span').textContent = count
+        }
+      })
+    </script>
+  </body>
+</html>

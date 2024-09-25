@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <title>Clock - Ring</title>
+  </head>
+  <body>
+    <main>
+      <h1><img src="../favicon.ico"> Clock</h1>
+      <h2></h2>
+    </main>
+    <script type="module">
+      import ring from "../index.js"
+
+      ring({
+        builder: (update, dispatch) => ({
+          init: () => {
+            update(() => new Date())
+            setTimeout(() => {dispatch('init')}, 100)
+          }
+        }),
+        view: time => {
+          document.body.querySelector('h2').textContent =
+            !time ? '00:00:00' : [
+              time.getHours(),
+              time.getMinutes(),
+              time.getSeconds()
+            ].map(n => (n < 10 ? '0' : '')+n).join(':')
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,29 +1,27 @@
-export default ({init, update, view, done}) => {
+export default ({init, builder, view}) => {
   var state
-  var isRunning = true
+  var isRunning = false
 
-  const dispatch = message => {
+  const dispatch = (event, ...args) => {
+    if (isRunning && typeof events[event] == 'function') {
+      events[event](...args)
+    }
+  }
+
+  const update = setter => {
     if (isRunning) {
-      change(update(message, state))
+      state = setter(state)
+      view(state, dispatch)
     }
   }
 
-  const change = ([newState, effect]) => {
-    state = newState
-    if (effect) {
-      effect(dispatch)
-    }
-    view(state, dispatch)
-  }
-
-  change(init)
+  const events = builder(update, dispatch)
+  isRunning = true
+  update(() => init)
+  dispatch('init')
 
   return () => {
-    if (isRunning) {
-      isRunning = false
-      if (done) {
-        done(state)
-      }
-    }
+    dispatch('done')
+    isRunning = false
   }
 }

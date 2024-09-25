@@ -9,22 +9,16 @@
     <title>Ring</title>
   </head>
   <body>
-    <h1><img src="favicon.ico"> Ring</h1>
-    <p>A counter that increments by one every time the user confirms.</p>
-    <script type="module">
-      import ring from "./index.js"
-
-      setTimeout(() => ring({
-        init: [0],
-        update: (message, state) => {
-          return [state + 1]
-        },
-        view: (state, dispatch) => {
-          if (window.confirm(`Count is ${state}. Increment?`)) {
-            dispatch()
-          }
-        }
-      }))
-    </script>
+    <main>
+      <h1><img src="favicon.ico"> Ring</h1>
+      <ul>
+        <li><a href="examples/counter.html">Counter</a></li>
+        <li><a href="examples/todo.html">To do list</a></li>
+        <li><a href="examples/clock.html">Clock</a></li>
+        <li><a href="examples/stopwatch.html">Stopwatch</a></li>
+        <li><a href="examples/lazy_db.html">Lazy DB</a></li>
+        <li><a href="https://github.com/marcodpt/ring">Repository</a></li>
+      </ul>
+    </main>
   </body>
 </html>

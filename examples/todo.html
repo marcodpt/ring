@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <title>Todo - Ring</title>
+  </head>
+  <body>
+    <h1><img src="../favicon.ico"> To do list</h1>
+    <input type="text">
+    <ul></ul>
+    <button>New!</button>
+    <script type="module">
+      import ring from "../index.js"
+
+      ring({
+        init: [],
+        builder: (update, dispatch) => ({
+          init: () => {
+            const input = document.body.querySelector('input')
+            document.body.querySelector('button').
+              addEventListener('click',() => {
+                dispatch('addTodo', input.value)
+                input.value = ""
+              })
+          },
+          addTodo: value => update(todos => todos.concat(value))
+        }),
+        view: todos => {
+          document.body.querySelector('ul').innerHTML =
+            todos.map(todo => `<li>${todo}</li>`).join('\n')
+        }
+      })
+    </script>
+  </body>
+</html>

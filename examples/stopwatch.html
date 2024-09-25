@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <title>Stopwatch - Ring</title>
+  </head>
+  <body>
+    <main>
+      <h1><img src="../favicon.ico"> Stopwatch</h1>
+      <h2></h2>
+      <button class="start">Start</button>
+      <button class="stop">Stop</button>
+      <button class="reset">Reset</button>
+      <button onclick="kill()">Kill</button>
+    </main>
+    <script type="module">
+      import ring from "../index.js"
+
+      window.kill = ring({
+        init: {
+          clock: 0,
+          offset: 0
+        },
+        builder: (update, dispatch) => ({
+          init: () => {
+            document.body.querySelectorAll('button[class]').forEach(btn => {
+              btn.addEventListener('click', () => {
+                dispatch(btn.getAttribute('class'))
+              })
+            })
+          },
+          reset: () => update(state => ({
+            ...state,
+            clock: 0
+          })),
+          start: () => update(state => {
+            if (!state.offset) {
+              setTimeout(() => dispatch('tick'))
+            }
+            return {
+              ...state,
+              offset: Date.now()
+            }
+          }),
+          stop: () => update(state => ({
+            ...state,
+            offset: 0
+          })),
+          tick: () => {
+            update(({offset, clock}) => {
+              if (offset) {
+                const now = Date.now()
+                setTimeout(() => dispatch('tick'), 100)
+                return {
+                  clock: clock + (now - offset) / 1000,
+                  offset: now
+                }
+              } else {
+                return {offset, clock}
+              }
+            })
+          }
+        }),
+        view: ({clock}, dispatch) => {
+          document.body.querySelector('h2').textContent = clock.toFixed(3)
+        }
+      })
+    </script>
+  </body>
+</html>
