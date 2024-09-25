@@ -115,3 +115,39 @@ This work is hugely influenced by these amazing projects:
  - [vue](https://github.com/vuejs/vue)
 
 A huge thank you to all the people who contributed to these projects.
+
+## 📢 Motivation
+I was extremely delighted and impressed with
+[Hyperapp](https://github.com/jorgebucaran/hyperapp) and
+[Raj](https://github.com/andrejewski/raj) when I started using them.
+
+But some things started to bother me:
+ - `view` receives `dispatch` in [Raj](https://github.com/andrejewski/raj),
+which implies that `actions` are not static, and with each call to `view` new
+`actions` are generated.
+ - [Hyperapp](https://github.com/jorgebucaran/hyperapp) achieves static actions
+by placing them outside the app. Which in my opinion breaks the paradigm of a
+pure, internal execution environment.
+ - The asynchronous nature of JavaScript makes it difficult to know the `state`
+inside dispatch calls in [Raj](https://github.com/andrejewski/raj).
+ - I can't understand [Hyperapp](https://github.com/jorgebucaran/hyperapp)'s
+`effects` API to this day.
+ - It's very difficult to separate layout from javascript logic in
+[Hyperapp](https://github.com/jorgebucaran/hyperapp)'s `views`.
+
+What would I want from a state management library?
+ - The `actions` define static `events` within the `app`, and these could be
+called from each other, also functioning as a library.
+ - `State` `updates` must be explicit and always carry the current `state`
+value, regardless of the asynchronous sequence of execution.
+ - It will be isolated, tiny, easy to understand and there will be no reason
+for me to want to modify the API. Without integrating
+[vDom](https://github.com/jorgebucaran/superfine),
+[template engine](https://github.com/marcodpt/tint),
+[routing](https://github.com/marcodpt/wand),
+and others.
+
+So I decided to try to create my state management library, to serve as a solid
+foundation for more [complex problems](https://github.com/marcodpt/merlin).
+
+And I'm happy with the result!
