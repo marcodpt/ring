@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <title>Ring</title>
+  </head>
+  <body>
+    <script type="module">
+      import ring from "../index.js"
+
+      ring({
+        init: 0,
+        builder: update => ({
+          inc: () => update(count => count + 1)
+        }),
+        view: (count, {inc}) => {
+          if (window.confirm(`Count is ${count}. Increment?`)) {
+            inc()
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

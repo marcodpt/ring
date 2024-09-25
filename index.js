@@ -11,7 +11,7 @@ export default ({init, builder, view}) => {
   const update = setter => {
     if (isRunning) {
       state = setter(state)
-      view(state, dispatch)
+      view(state, events)
     }
   }
 

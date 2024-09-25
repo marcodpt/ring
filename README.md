@@ -20,43 +20,24 @@ very understandable.
 understand `Ring` better than me.
 
 ## 💡 Showcase
-[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/todo.html)
+A counter that increments by one every time the user confirms.
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Todo - Ring</title>
-  </head>
-  <body>
-    <h1>To do list</h1>
-    <input type="text">
-    <ul></ul>
-    <button>New!</button>
-    <script type="module">
-      import ring from "https://cdn.jsdelivr.net/gh/marcodpt/ring/index.js"
+[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/simple.html)
 
-      ring({
-        init: [],
-        builder: (update, dispatch) => ({
-          init: () => {
-            const input = document.body.querySelector('input')
-            document.body.querySelector('button').
-              addEventListener('click',() => {
-                dispatch('addTodo', input.value)
-                input.value = ""
-              })
-          },
-          addTodo: value => update(todos => todos.concat(value))
-        }),
-        view: todos => {
-          document.body.querySelector('ul').innerHTML =
-            todos.map(todo => `<li>${todo}</li>`).join('\n')
-        }
-      })
-    </script>
-  </body>
-</html>
+```js
+import ring from "https://cdn.jsdelivr.net/gh/marcodpt/ring/index.js"
+
+ring({
+  init: 0,
+  builder: update => ({
+    inc: () => update(count => count + 1)
+  }),
+  view: (count, {inc}) => {
+    if (window.confirm(`Count is ${count}. Increment?`)) {
+      inc()
+    }
+  }
+})
 ```
 
 ## 💯 Examples
