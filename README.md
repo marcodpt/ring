@@ -125,9 +125,9 @@ But some things started to bother me:
  - `view` receives `dispatch` in [Raj](https://github.com/andrejewski/raj),
 which implies that `actions` are not static, and with each call to `view` new
 `actions` are generated.
- - [Hyperapp](https://github.com/jorgebucaran/hyperapp) achieves static actions
-by placing them outside the app. Which in my opinion breaks the paradigm of a
-pure, internal execution environment.
+ - [Hyperapp](https://github.com/jorgebucaran/hyperapp) achieves static
+`actions` by placing them outside the `app`. Which in my opinion breaks the
+paradigm of a pure, internal execution environment.
  - The asynchronous nature of JavaScript makes it difficult to know the `state`
 inside dispatch calls in [Raj](https://github.com/andrejewski/raj).
  - I can't understand [Hyperapp](https://github.com/jorgebucaran/hyperapp)'s
