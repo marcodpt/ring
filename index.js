@@ -18,10 +18,10 @@ export default ({init, builder, view}) => {
   const events = builder(update, dispatch)
   isRunning = true
   update(() => init)
-  dispatch('init')
+  dispatch('init', state)
 
   return () => {
-    dispatch('done')
+    dispatch('done', state)
     isRunning = false
   }
 }
