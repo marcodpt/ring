@@ -37,15 +37,19 @@
             ...state,
             clock: 0
           })),
-          start: () => update(state => {
-            if (!state.offset) {
-              setTimeout(() => dispatch('tick'))
+          start: () => {
+            var tick
+            update(state => {
+              tick = !state.offset
+              return {
+                ...state,
+                offset: Date.now()
+              }
+            })
+            if (tick) {
+              dispatch('tick')
             }
-            return {
-              ...state,
-              offset: Date.now()
-            }
-          }),
+          },
           stop: () => update(state => ({
             ...state,
             offset: 0

@@ -20,7 +20,7 @@ very understandable.
 understand `Ring` better than me.
 
 ## 💡 Showcase
-[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/todo.html)
+[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/todo.html)
 
 ```html
 <!DOCTYPE html>
@@ -61,23 +61,19 @@ understand `Ring` better than me.
 
 ## 💯 Examples
 
-### Counter
+ - Counter:
 [![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/counter.html)
 [![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/ring/blob/main/examples/counter.html)
-
-### Todo
-[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/todo_ssr.html)
-[![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/ring/blob/main/examples/todo_ssr.html)
-
-### Clock:
+ - Todo:
+[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/todo.html)
+[![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/ring/blob/main/examples/todo.html)
+ - Clock:
 [![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/clock.html)
 [![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/ring/blob/main/examples/clock.html)
-
-### Stopwatch:
+ - Stopwatch:
 [![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/stopwatch.html)
 [![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/ring/blob/main/examples/stopwatch.html)
-
-### Lazy DB:
+ - Lazy DB:
 [![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/ring/examples/lazy_db.html)
 [![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/ring/blob/main/examples/lazy_db.html)
 
