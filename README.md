@@ -60,14 +60,14 @@ ring({
 
 ## 📖 API
 
-### app({init, builder, view}) => stop
+### ring({init, builder, view}) => stop
 
 #### init: _
-The initial `state` of the `app`. It can be any type of data.
+The initial `state` of the `ring`. It can be any type of data.
 
 #### builder: (update, dispatch) => events
-This function is called before starting the app and must return the events that
-will be heard in the app.
+This function is called before starting the `ring` and must return the events
+that will be heard.
 
 ##### update: (state => newState) => ()
 Receives a `setter` to `update` the `state` and call `view` with the
@@ -77,20 +77,20 @@ Receives a `setter` to `update` the `state` and call `view` with the
 It will call the `event` with `args`, if it exists in the `events` object.
 
 ##### events: {init: () => (), event: (...args) => (), done: () => ()}
-Object with the `events` that will be heard when running the `app`.
+Object with the `events` that will be heard when running the `ring`.
 
 ##### init: state => ()
-Special event called when starting `app`.
+Special event called when starting `ring`.
 
 ##### done: state => ()
-Special event called when `app` ends.
+Special event triggered when `stop` is called.
 
 #### view: (state, events) => ()
-Updates the `view` of the `app`, it is always called after an `update` or when
+Updates the `view` of the `ring`, it is always called after an `update` or when
 starting.
 
 #### stop: () => ()
-Returns a function that `stops` the `app`.
+Returns a function that `stops` the `ring`.
 
 ## 📦 Projects using this module
 If your project is not on the list, submit a pull request, it is a way to
@@ -128,8 +128,12 @@ which implies that `actions` are not static, and with each call to `view` new
  - [Hyperapp](https://github.com/jorgebucaran/hyperapp) achieves static
 `actions` by placing them outside the `app`. Which in my opinion breaks the
 paradigm of a pure, internal execution environment.
- - The asynchronous nature of JavaScript makes it difficult to know the `state`
+ - It is difficult to know the `state`
 inside dispatch calls in [Raj](https://github.com/andrejewski/raj).
+ - It's hard to know the `state` within dispatch calls when it involves
+concurrent asynchronous calls both in
+[Raj](https://github.com/andrejewski/raj) and in
+[Hyperapp](https://github.com/jorgebucaran/hyperapp).
  - I can't understand [Hyperapp](https://github.com/jorgebucaran/hyperapp)'s
 `effects` API to this day.
  - It's very difficult to separate layout from javascript logic in
