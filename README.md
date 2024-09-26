@@ -80,13 +80,13 @@ It will call the `event` with `args`, if it exists in the `events` object.
 Object with the `events` that will be heard when running the `ring`.
 
 ##### init: state => ()
-Special event called when starting `ring`.
+Special `event` called at startup.
 
 ##### event: (...args) => ()
-The function signature of a user-defined event. Event can have any name.
+The function signature of a user-defined `event` can have any name.
 
 ##### done: state => ()
-Special event triggered when `stop` is called.
+Special `event` triggered when `stop` is called.
 
 #### view: (state, events) => ()
 Updates the `view` of the `ring`, it is always called after an `update` or when
