@@ -128,9 +128,7 @@ which implies that `actions` are not static, and with each call to `view` new
  - [Hyperapp](https://github.com/jorgebucaran/hyperapp) achieves static
 `actions` by placing them outside the `app`. Which in my opinion breaks the
 paradigm of a pure, internal execution environment.
- - It is difficult to know the `state`
-inside dispatch calls in [Raj](https://github.com/andrejewski/raj).
- - It's hard to know the `state` within dispatch calls when it involves
+ - It's hard to know the `state` within `dispatch` calls when it involves
 concurrent asynchronous calls both in
 [Raj](https://github.com/andrejewski/raj) and in
 [Hyperapp](https://github.com/jorgebucaran/hyperapp).
@@ -145,7 +143,7 @@ called from each other, also functioning as a library.
  - `State` `updates` must be explicit and always carry the current `state`
 value, regardless of the asynchronous sequence of execution.
  - It will be isolated, tiny, easy to understand and there will be no reason
-for me to want to modify the API. Without integrating
+for me to want to modify the [API](#-api). Without integrating
 [vDom](https://github.com/jorgebucaran/superfine),
 [template engine](https://github.com/marcodpt/tint),
 [routing](https://github.com/marcodpt/wand),
