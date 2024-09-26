@@ -76,11 +76,14 @@ Receives a `setter` to `update` the `state` and call `view` with the
 ##### dispatch: (event, ...args) => ()
 It will call the `event` with `args`, if it exists in the `events` object.
 
-##### events: {init: () => (), event: (...args) => (), done: () => ()}
+##### events: {init, ...events, done}
 Object with the `events` that will be heard when running the `ring`.
 
 ##### init: state => ()
 Special event called when starting `ring`.
+
+##### event: (...args) => ()
+The function signature of a user-defined event. Event can have any name.
 
 ##### done: state => ()
 Special event triggered when `stop` is called.
