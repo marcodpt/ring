@@ -66,7 +66,7 @@ ring({
 The initial `state` of the `ring`. It can be any type of data.
 
 #### builder: (update, dispatch) => events
-This function is called before starting the `ring` and must return the events
+This function is called before starting the `ring` and must return the `events`
 that will be heard.
 
 ##### update: (state => newState) => ()
