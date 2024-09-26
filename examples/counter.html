@@ -17,7 +17,7 @@
 
       ring({
         init: 0,
-        builder: (update, dispatch) => ({
+        register: (update, dispatch) => ({
           init: () => {
             document.body.querySelectorAll('button').forEach(btn => {
               btn.addEventListener('click', ev => {

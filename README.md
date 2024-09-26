@@ -29,7 +29,7 @@ import ring from "https://cdn.jsdelivr.net/gh/marcodpt/ring/index.js"
 
 ring({
   init: 0,
-  builder: update => ({
+  register: update => ({
     inc: () => update(count => count + 1)
   }),
   view: (count, {inc}) => {
@@ -60,24 +60,24 @@ ring({
 
 ## 📖 API
 
-### ring({init, builder, view}) => stop
+### ring({init, register, view}) => stop
 
 #### init: _
 The initial `state` of the `ring`. It can be any type of data.
 
-#### builder: (update, dispatch) => events
-This function is called before starting the `ring` and must return the `events`
-that will be heard.
+#### register: (update, dispatch) => events
+It is called before initializing the `ring` returning the `registered`
+`events`.
 
 ##### update: (state => newState) => ()
 Receives a `setter` to `update` the `state` and call `view` with the
 `newState`.
 
 ##### dispatch: (event, ...args) => ()
-It will call the `event` with `args`, if it exists in the `events` object.
+Triggers a call to a `registered` `event` passing `...args` to the `event`.
 
 ##### events: {init, ...events, done}
-Object with the `events` that will be heard when running the `ring`.
+Events `registered` at `ring` initialization by the `register` function.
 
 ##### init: state => ()
 Special `event` called at startup.

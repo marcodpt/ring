@@ -25,7 +25,7 @@
           clock: 0,
           offset: 0
         },
-        builder: (update, dispatch) => ({
+        register: (update, dispatch) => ({
           init: () => {
             document.body.querySelectorAll('button[class]').forEach(btn => {
               btn.addEventListener('click', () => {

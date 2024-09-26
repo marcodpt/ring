@@ -17,7 +17,7 @@
       import ring from "../index.js"
 
       ring({
-        builder: (update, dispatch) => ({
+        register: (update, dispatch) => ({
           init: () => {
             update(() => new Date())
             setTimeout(() => {dispatch('init')}, 100)

@@ -1,4 +1,4 @@
-export default ({init, builder, view}) => {
+export default ({init, register, view}) => {
   var state
   var isRunning = false
 
@@ -15,7 +15,7 @@ export default ({init, builder, view}) => {
     }
   }
 
-  const events = builder(update, dispatch)
+  const events = register(update, dispatch)
   isRunning = true
   update(() => init)
   dispatch('init', state)

@@ -18,7 +18,7 @@
 
       ring({
         init: [],
-        builder: (update, dispatch) => ({
+        register: (update, dispatch) => ({
           init: () => {
             const input = document.body.querySelector('input')
             document.body.querySelector('button').

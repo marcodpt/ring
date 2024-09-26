@@ -20,7 +20,7 @@ QUnit.test('runtime', assert => {
   ]
   const kill = ring({
     init: 'base',
-    builder: (update, dispatch) => ({
+    register: (update, dispatch) => ({
       init: state => {
         update(() => `${state} -> init`)
         dispatch('next', 'init', 1)

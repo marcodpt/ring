@@ -10,7 +10,7 @@
 
       ring({
         init: 0,
-        builder: update => ({
+        register: update => ({
           inc: () => update(count => count + 1)
         }),
         view: (count, {inc}) => {
